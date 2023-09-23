@@ -8,7 +8,11 @@ const path = require("path");
 const fs = require("fs");
 
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
