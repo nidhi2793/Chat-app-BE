@@ -16,9 +16,10 @@ app.use(bodyParser.json());
 
 const userRouter = require("./router/userRouter");
 app.use("/", userRouter);
+app.use("/user", userRouter);
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .then((result) => {
     app.listen(process.env.PORT || 3000);
   })
