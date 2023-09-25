@@ -58,7 +58,7 @@ app.use("/chat", chatRouter);
 app.use("/group", groupRouter);
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .then((result) => {
     app.listen(process.env.PORT || 4000);
   })
