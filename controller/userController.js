@@ -5,9 +5,11 @@ const jwt = require("jsonwebtoken");
 const sequelize = require("../util/database");
 const Sib = require("sib-api-v3-sdk");
 const { Op } = require("sequelize");
+
 function generateAccessToken(id, email) {
   return jwt.sign({ userId: id, email: email }, process.env.TOKEN);
 }
+
 const getLoginPage = async (req, res, next) => {
   try {
     res.sendFile(path.join(__dirname, "../", "public", "views", "login.html"));
@@ -15,6 +17,7 @@ const getLoginPage = async (req, res, next) => {
     console.log(error);
   }
 };
+
 const postUserSignUp = async (req, res, next) => {
   try {
     const name = req.body.name;
@@ -53,10 +56,12 @@ const postUserSignUp = async (req, res, next) => {
     console.log(error);
   }
 };
+
 const postUserLogin = async (req, res, next) => {
   try {
     const email = req.body.loginEmail;
     const password = req.body.loginPassword;
+
     await User.findOne({ where: { email: email } }).then((user) => {
       if (user) {
         bcrypt.compare(password, user.password, (err, result) => {
@@ -89,6 +94,7 @@ const postUserLogin = async (req, res, next) => {
     console.log(error);
   }
 };
+
 module.exports = {
   getLoginPage,
   postUserSignUp,
